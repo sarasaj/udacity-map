@@ -1,0 +1,19 @@
+what is this project ?
+this readme file is for udacity nanodegree neighborhood map project it uses google api to show a mao for a certain place
+ans markers for some locations. also you can filter and search for places in the left mneu.
+
+how to run project :
+1. open you terminal and navigate to the project directory then type 
+http-server or use and prefferd way to run it on a server.
+2.open the url of the index page on your browser and use it.
+
+how to use it ? 
+1. you click om any marker or list item to highlight the marker and see more info about it on wikipedia.
+2.you can search the locations in the list using the search filter.
+
+what is used in this project: 
+1.knocoutJS
+2.google map API
+3.wikipedia API
+4.jquery 
+5.ajax

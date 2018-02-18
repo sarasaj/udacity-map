@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+    <!-- the html represnts the view -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <input placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+
+        <div data-bind="foreach:locations">
+            <a href="#" data-bind="text:title , click: show"></a>
+        </div>
+
+    </div>
+    <!-- used this from a lesson on w3school -->
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="hamburger">&#9776;</span>
+    <span id="title"> neighborhood map | sara alhasan | udacity </span>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100vw";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("map").style.marginLeft = "0p";
+        }
+    </script>
+
+    <div id="map"></div>
+
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+    <script src="main.js"></script>
+    <script src="viewModel.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVXNAw_eIrEr5Kj_oog9ZSVTe15iV9ikE&v=3&callback=initMap" onerror="errorMessage()">
+    </script>
+
+
+</body>
+
+</html>
