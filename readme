@@ -3,13 +3,28 @@ this readme file is for udacity nanodegree neighborhood map project it uses goog
 ans markers for some locations. also you can filter and search for places in the left mneu.
 
 how to run project :
-1. open you terminal and navigate to the project directory then type 
-http-server or use and prefferd way to run it on a server.
-2.open the url of the index page on your browser and use it.
+1. open you terminal/command line and navigate to the project directory 
+by typing: 
+cd (your folder directory)
+example :
+cd C:\Users\Username\Documents\GitHub\udacity-map
+
+2. type 
+http-server and you'll get the localhost:8080 links 
+or use and prefferd way to run it on a server like python.
+
+Python 3:
+python -m http.server 8080
+
+Python 2:
+python -m SimpleHTTPServer 8080
+
+3.open the url (localhost:8080) of the index page on your browser and use it.
 
 how to use it ? 
-1. you click om any marker or list item to highlight the marker and see more info about it on wikipedia.
+1.you can click on any marker or list item to highlight the marker and see more info about it on wikipedia.
 2.you can search the locations in the list using the search filter.
+3.you get to know Zell Am see map ! where i spent some days during my honeymoon.
 
 what is used in this project: 
 1.knocoutJS
@@ -17,3 +32,4 @@ what is used in this project:
 3.wikipedia API
 4.jquery 
 5.ajax
+6.foursquare API

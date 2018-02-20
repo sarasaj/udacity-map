@@ -2,6 +2,8 @@
 var map;
 var markers = [];
 var marker;
+var current; //current marker
+
 var locationsArray = [{
         title: 'Grand Hotel Zell Am See',
         location: {
@@ -54,7 +56,9 @@ var largeInfowindow;
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
-
+    var defaultIcon = makeMarkerIcon('d61717');
+    var highLightedIcon = makeMarkerIcon('FFFF24');
+    
     try {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {
@@ -68,8 +72,7 @@ function initMap() {
         console.log("in catch");
     }
     largeInfowindow = new google.maps.InfoWindow();
-    var defaultIcon = makeMarkerIcon('d61717');
-    var highLightedIcon = makeMarkerIcon('FFFF24');
+    
 
     var bounds = new google.maps.LatLngBounds();
     // The following group uses the location array to create an array of markers on initialize.
@@ -87,24 +90,31 @@ function initMap() {
             id: i
         });
         // Push the marker to our array of markers.
+        marker.setIcon(defaultIcon);
         markers.push(marker);
         locationsArray[i].marker = marker;
         // Create an onclick event to open an infowindow at each marker.
-        marker.addListener('click', changeColor);
+        marker.addListener('click', onclickinfo);
         bounds.extend(markers[i].position);
+        current= marker;
     }
     // Extend the boundaries of the map for each marker
-    map.fitBounds(bounds);
+    google.maps.event.addDomListener(window, 'resize', function() {
+      map.fitBounds(bounds); // `bounds` is a `LatLngBounds` object
+    });
 
     ko.applyBindings(viewModel);
 
 }
 
-function changeColor() {
+function onclickinfo() {
     var onClickIcon = makeMarkerIcon('7142f4');
+    restMarker();
+    current = this;
     populateInfoWindow(this, largeInfowindow);
     this.setIcon(onClickIcon); //when clicked it turns purple
 }
+
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
 // on that markers position.
@@ -157,15 +167,39 @@ function makeMarkerIcon(markerColor) {
     return markerImage;
 }
 
+function hideAllMarkers(){
+    for (var i = 0; i < locationsArray.length; i++) {
+        locationsArray[i].marker.setVisible(false);
+    }
+}
 function toggleBounce(marker) {
+    restMarker();
+    current = marker;
     if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
 
     } else {
         marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function () {
+            marker.setAnimation(null);
+        }, 1000); 
     }
 }
 
 function errorMessage() {
     alert("an error accord please check again");
+}
+function restMarker(){
+    current.setAnimation(null);
+    var defaultIcon = makeMarkerIcon('d61717');
+    current.setIcon(defaultIcon);
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100vw";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("map").style.marginLeft = "0p";
 }

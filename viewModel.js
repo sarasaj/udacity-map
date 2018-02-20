@@ -19,9 +19,11 @@ var viewModel = function() {
         populateInfoWindow(location.marker(), largeInfowindow);
     };
     this.search = function(value) {
+        hideAllMarkers();
         self.locations.removeAll();
         for (var x in locationsArray) {
             if (locationsArray[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                locationsArray[x].marker.setVisible(true);
                 self.locations.push(new Location(locationsArray[x]));
             }
         }
