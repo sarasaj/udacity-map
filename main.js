@@ -132,11 +132,17 @@ function populateInfoWindow(marker, infowindow) {
                 var wikiContent = '';
                 var articleList = response[1],
                     articleStr = articleList[0];
-                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                console.log("wiki" + url);
-                infowindow.setContent('<div>' + marker.title + '</div><br> visit <a target="_blank" href="' + url + '">wikipedia site for more info</a><br>');
-                console.log("wiki:done");
+                var url;
+                if(articleStr === undefined) {
+                    url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    infowindow.setContent('<div>' + marker.title + '</div><br> no wikipedia article has been found');
+                    
+                }else {
+                    url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    infowindow.setContent('<div>' + marker.title + '</div><br> visit <a target="_blank" href="' + url + '">wikipedia site for more info</a><br>');
+                }
                 infowindow.open(map, marker);
+                
 
             })
             .fail(function() {
